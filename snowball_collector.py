@@ -72,20 +72,29 @@ def get_relationships(name, link, number):
     master_dict = defaultdict(set)
     name_queue = deque()
     link_queue = deque()
+    names_seen = set()
     total_collected = 0
 
     # Stop when we have enough people or no more links to follow
     while total_collected < number or not name_queue:
         people, links = extract_relations(link)
-        master_dict[name].update(set(people))
 
-        name_queue.extend(people)
-        link_queue.extend(links)
+        for i in range(len(people)):
+            person_name = people[i]
+            person_link = links[i]
+            if person_name not in names_seen:
+                name_queue.append(person_name)
+                link_queue.append(person_link)
+                total_collected += 1
 
-        total_collected += len(people)
+        people = set(people)
+        master_dict[name].update(people)
 
-        link = link_queue.popleft()
         name = name_queue.popleft()
+        link = link_queue.popleft()
+        
+        names_seen.add(name)
+        
 
 
     return master_dict
@@ -117,4 +126,5 @@ def main():
     write_output(data, output_path)
 
 if __name__ == "__main__":
+
     main()

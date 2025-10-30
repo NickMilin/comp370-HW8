@@ -90,12 +90,10 @@ def get_relationships(name, link, number):
         people = set(people)
         master_dict[name].update(people)
 
+        names_seen.add(name)
+
         name = name_queue.popleft()
         link = link_queue.popleft()
-        
-        names_seen.add(name)
-        
-
 
     return master_dict
 

@@ -12,7 +12,7 @@ headers = {
 url = "https://www.whosdatedwho.com/dating/"
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Scrape trending article links from Montreal Gazette")
+    parser = argparse.ArgumentParser(description="Scrape relationship links from Whosdatedwho using snowball sampling")
     parser.add_argument('celebrity', help='Celebrity name to search for. ex: "Orlando Bloom"')
     parser.add_argument('number', help='Total number of celebrities we want to collect')
     parser.add_argument('-o', '--output', help='Output JSON file (optional, defaults to stdout)')
